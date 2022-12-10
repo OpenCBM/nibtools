@@ -88,7 +88,6 @@ main(int argc, char *argv[])
 	double st, et;
 	char filename[256], logfilename[256], *dotpos;
 	char argcache[256];
-    char c; /* user input */
 
 	printf(
 		"\nnibread - Commodore 1541/1571 disk image nibbler\n"
