@@ -112,10 +112,6 @@ extern int backwards;
 /* common */
 void usage(void);
 
-/* nibread.c */
-int disk2file(CBM_FILE fd, char * filename);
-void parallel_test(int interations);
-
 /* nibwrite.c */
 int loadimage(char * filename);
 int writeimage(CBM_FILE fd);
