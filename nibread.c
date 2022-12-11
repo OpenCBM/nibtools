@@ -44,6 +44,7 @@ int track_match;
 int gap_match_length;
 int cap_min_ignore;
 int interactive_mode;
+int file_valid;
 int verbose;
 int extended_parallel_test;
 int force_nosync;
@@ -122,6 +123,7 @@ main(int argc, char *argv[])
 	force_density = 0;
 	track_match = 0;
 	interactive_mode = 0;
+    file_valid = 1;
 	verbose = 1;
 	extended_parallel_test = 0;
 	force_nosync = 0;
@@ -384,11 +386,11 @@ main(int argc, char *argv[])
         {
             do {
                 show_menu(filename);
+                file_valid = 1;
                 if (!(  compare_extension(filename, "NIB")
                       || compare_extension(filename, "NB2")
                       || compare_extension(filename, "NBZ"))) {
-                    printf("unsupported file type - only .nib, .nb2 or .nbz allowed!\n");
-                    printf("please enter a valid file name\n");
+                    file_valid = 0;
                     continue;
                 }
                 if(!(disk2file(fd, filename))) {
@@ -480,11 +482,16 @@ static void show_menu(char *filename)
     char input[256];
 
 	printf("\e[1;1H\e[2J\n"); /* clear screen and newline */
-	printf("file name to be written: %s\n\n", filename);
-	printf("Insert disk and enter a command:\n\n");
-	printf("some.txt - changes filename\n");
+    if (file_valid) {
+        printf("file name to be written: %s\n\n", filename);
+        printf("Insert disk and enter a command:\n\n");
+        printf("some.txt - changes filename\n");
+        printf("<enter>: read disk and write to file\n");
+    } else {
+        printf("!! unsupported file type - only .nib, .nb2 or .nbz allowed! !!\n");
+        printf("!!             please enter a valid file name               !!\n\n");
+    }
 	printf("'q'uit - (no need to insert a disk ;-)\n");
-	printf("<enter>: read disk and write to file\n");
 
     fgets(input, sizeof(input), stdin);
     if (strlen(input) <= 1) {
