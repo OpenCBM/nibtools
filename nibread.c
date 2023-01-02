@@ -81,13 +81,14 @@ static int disk2file(CBM_FILE fd, char *filename);
 static void parallel_test(int iterations);
 static void show_menu(char *filename);
 static void next_filename(char *filename);
+static void create_logfile(char *filename, char *argcache);
 
 int ARCH_MAINDECL
 main(int argc, char *argv[])
 {
 	int bump, reset, i;
 	double st, et;
-	char filename[256], logfilename[256], *dotpos;
+	char filename[256];
 	char argcache[256];
 
 	printf(
@@ -328,20 +329,7 @@ main(int argc, char *argv[])
 		TrackAlignmentReport(fd);
 
 	/* create log file */
-	strcpy(logfilename, filename);
-	dotpos = strrchr(logfilename, '.');
-	if (dotpos != NULL)
-		*dotpos = '\0';
-	strcat(logfilename, ".log");
-
-	if ((fplog = fopen(logfilename, "wb")) == NULL)
-	{
-		printf("Couldn't create log file %s!\n", logfilename);
-		exit(2);
-	}
-
-	fprintf(fplog, "%s\n", VERSION);
-	fprintf(fplog, "'%s'\n", argcache);
+    create_logfile(filename, argcache);
 
 	if(strrchr(filename, '.') == NULL)  strcat(filename, ".nbz");
 
@@ -396,7 +384,9 @@ main(int argc, char *argv[])
                 if(!(disk2file(fd, filename))) {
                     printf("Operation failed!\n");
                 } else {
+                    fclose(fplog);
                     next_filename(filename);
+                    create_logfile(filename, argcache);
                 }
             } while(TRUE);
         } else {
@@ -418,6 +408,27 @@ main(int argc, char *argv[])
 	if(fplog) fclose(fplog);
 
 	exit(0);
+}
+
+static void create_logfile(char *filename, char *argcache)
+{
+	char logfilename[256], *dotpos;
+
+	strcpy(logfilename, filename);
+	dotpos = strrchr(logfilename, '.');
+	if (dotpos != NULL)
+		*dotpos = '\0';
+	strcat(logfilename, ".log");
+
+	if ((fplog = fopen(logfilename, "wb")) == NULL)
+	{
+		printf("Couldn't create log file %s!\n", logfilename);
+		exit(2);
+	}
+
+	fprintf(fplog, "%s\n", VERSION);
+	fprintf(fplog, "'%s'\n", argcache);
+
 }
 
 static void next_filename(char *filename)
@@ -498,6 +509,9 @@ static void show_menu(char *filename)
         return;
     }
     if (input[0] == 'q') {
+        if (fplog) {
+            close(fplog);
+        }
         exit(0);
     }
 
