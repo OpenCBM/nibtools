@@ -44,6 +44,7 @@ int track_match;
 int gap_match_length;
 int cap_min_ignore;
 int interactive_mode;
+int file_valid;
 int verbose;
 int extended_parallel_test;
 int force_nosync;
@@ -77,14 +78,19 @@ float motor_speed;
 CBM_FILE fd;
 FILE *fplog;
 
+static int disk2file(CBM_FILE fd, char *filename);
+static void parallel_test(int iterations);
+static void show_menu(char *filename);
+static void next_filename(char *filename);
+static void create_logfile(char *filename, char *argcache);
+
 int ARCH_MAINDECL
 main(int argc, char *argv[])
 {
 	int bump, reset, i;
 	double st, et;
-	char filename[256], logfilename[256], *dotpos;
+	char filename[256];
 	char argcache[256];
-	FILE *fp;
 
 	printf(
 		"\nnibread - Commodore 1541/1571 disk image nibbler\n"
@@ -119,6 +125,7 @@ main(int argc, char *argv[])
 	force_density = 0;
 	track_match = 0;
 	interactive_mode = 0;
+    file_valid = 1;
 	verbose = 1;
 	extended_parallel_test = 0;
 	force_nosync = 0;
@@ -280,13 +287,6 @@ main(int argc, char *argv[])
 	if(argc < 1) usage();
 	strcpy(filename, argv[0]);
 
-	if( (fp=fopen(filename,"r")) )
-	{
-		fclose(fp);
-		printf("File exists - Overwrite? (y/N)");
-		if(getchar() != 'y') exit(0);
-	}
-
 #ifdef DJGPP
 	calibrate();
 	if (!detect_ports(reset))
@@ -330,20 +330,7 @@ main(int argc, char *argv[])
 		TrackAlignmentReport(fd);
 
 	/* create log file */
-	strcpy(logfilename, filename);
-	dotpos = strrchr(logfilename, '.');
-	if (dotpos != NULL)
-		*dotpos = '\0';
-	strcat(logfilename, ".log");
-
-	if ((fplog = fopen(logfilename, "wb")) == NULL)
-	{
-		printf("Couldn't create log file %s!\n", logfilename);
-		exit(2);
-	}
-
-	fprintf(fplog, "%s\n", VERSION);
-	fprintf(fplog, "'%s'\n", argcache);
+    create_logfile(filename, argcache);
 
 	if(strrchr(filename, '.') == NULL)  strcat(filename, ".nbz");
 
@@ -384,10 +371,30 @@ main(int argc, char *argv[])
 		TrackAlignmentReport2(fd,track_buffer);
 	else
 	{
-		if(!(disk2file(fd, filename)))
-			printf("Operation failed!\n");
+        if (interactive_mode)
+        {
+            do {
+                show_menu(filename);
+                file_valid = 1;
+                if (!(  compare_extension(filename, "NIB")
+                      || compare_extension(filename, "NB2")
+                      || compare_extension(filename, "NBZ"))) {
+                    file_valid = 0;
+                    continue;
+                }
+                if(!(disk2file(fd, filename))) {
+                    printf("Operation failed!\n");
+                } else {
+                    fclose(fplog);
+                    next_filename(filename);
+                    create_logfile(filename, argcache);
+                }
+            } while(TRUE);
+        } else {
+            if(!(disk2file(fd, filename)))
+                printf("Operation failed!\n");
+        }
 	}
-
 
 	if (Use_SCPlus_IHS) // "-j"
 	{
@@ -404,7 +411,116 @@ main(int argc, char *argv[])
 	exit(0);
 }
 
-void parallel_test(int iterations)
+static void create_logfile(char *filename, char *argcache)
+{
+	char logfilename[256], *dotpos;
+
+	strcpy(logfilename, filename);
+	dotpos = strrchr(logfilename, '.');
+	if (dotpos != NULL)
+		*dotpos = '\0';
+	strcat(logfilename, ".log");
+
+	if ((fplog = fopen(logfilename, "wb")) == NULL)
+	{
+		printf("Couldn't create log file %s!\n", logfilename);
+		exit(2);
+	}
+
+	fprintf(fplog, "%s\n", VERSION);
+	fprintf(fplog, "'%s'\n", argcache);
+
+}
+
+static void next_filename(char *filename)
+{
+	char extension[4];
+	char newfilename[256];
+	char *dotpos;
+	int len, curpos, filenum;
+
+	/* save extension */
+	dotpos = strrchr(filename, '.');
+	if (dotpos == NULL) {
+		/* something went wrong, checked extension before */
+		puts("error in file name");
+		exit(0);
+	}
+	strcpy(extension, dotpos + 1);
+
+	/* search for digit and convert to int*/
+	*dotpos = '\0';
+	len = dotpos - filename;
+	for (curpos = len; curpos > 0; curpos--) {
+		if (isdigit(filename[curpos])) {
+			while (curpos > 0 && isdigit(filename[curpos])) {
+				curpos--;
+			}
+			break;
+		}
+	}
+
+	if (curpos == 0) {
+		/* either no number or starting with number */
+		if (isdigit(filename[curpos])) {
+			filenum = atoi(&filename[curpos]) + 1;
+			while (curpos < len && isdigit(filename[curpos])) {
+				filename[curpos] = '\0';
+				curpos++;
+			}
+			sprintf(newfilename, "%s%d%s.%s",
+					filename, filenum, &filename[curpos],  extension);
+		} else {
+			/* no number, add */
+			filenum = 1;
+			sprintf(newfilename, "%s_%d.%s", filename, filenum, extension);
+		}
+	} else {
+		curpos++;
+		/* filename contains number, increase */
+		filenum = atoi(&filename[curpos]) + 1;
+		while (curpos < len && isdigit(filename[curpos])) {
+			filename[curpos] = '\0';
+			curpos++;
+		}
+		sprintf(newfilename, "%s%d%s.%s",
+				filename, filenum, &filename[curpos],  extension);
+	}
+	strcpy(filename, newfilename);
+}
+
+static void show_menu(char *filename)
+{
+    char input[256];
+
+	printf("\e[1;1H\e[2J\n"); /* clear screen and newline */
+    if (file_valid) {
+        printf("file name to be written: %s\n\n", filename);
+        printf("Insert disk and enter a command:\n\n");
+        printf("some.txt - changes filename\n");
+        printf("<enter>: read disk and write to file\n");
+    } else {
+        printf("!! unsupported file type - only .nib, .nb2 or .nbz allowed! !!\n");
+        printf("!!             please enter a valid file name               !!\n\n");
+    }
+	printf("'q'uit - (no need to insert a disk ;-)\n");
+
+    fgets(input, sizeof(input), stdin);
+    if (strlen(input) <= 1) {
+        return;
+    }
+    if (input[0] == 'q') {
+        if (fplog) {
+            close(fplog);
+        }
+        exit(0);
+    }
+
+    input[strlen(input) - 1] = '\0';
+    strcpy(filename, input);
+}
+
+static void parallel_test(int iterations)
 {
 	int i;
 
@@ -422,11 +538,17 @@ void parallel_test(int iterations)
 	exit(0);
 }
 
-int disk2file(CBM_FILE fd, char *filename)
+static int disk2file(CBM_FILE fd, char *filename)
 {
-	int count = 0;
-	char newfilename[256];
-	char filenum[4], *dotpos;
+	FILE *fp;
+
+	if( (fp=fopen(filename,"r")) )
+	{
+		fclose(fp);
+		printf("File exists - Overwrite? (y/N)");
+		if(getchar() != 'y')
+			return (0);
+	}
 
 	/* read data from drive to file */
 	motor_on(fd);
@@ -441,29 +563,6 @@ int disk2file(CBM_FILE fd, char *filename)
 		if(!(read_floppy(fd, track_buffer, track_density, track_length))) return 0;
 		if(!(file_buffer_size = write_nib(file_buffer, track_buffer, track_density, track_length))) return 0;
 		if(!(save_file(filename, file_buffer, file_buffer_size))) return 0;
-
-		if(interactive_mode)
-		{
-			for(;;)
-			{
-				motor_off(fd);
-				printf("Swap disk and press a key for next image, or CTRL-C to quit.\n");
-				getchar();
-				motor_on(fd);
-
-				/* create new filename */
-				sprintf(filenum, "%d", ++count);
-				strcpy(newfilename, filename);
-				dotpos = strrchr(newfilename, '.');
-				if (dotpos != NULL) *dotpos = '\0';
-				strcat(newfilename, filenum);
-				strcat(newfilename, ".nib");
-
-				if(!(read_floppy(fd, track_buffer, track_density, track_length))) return 0;
-				if(!(file_buffer_size = write_nib(file_buffer, track_buffer, track_density, track_length))) return 0;
-				if(!(save_file(newfilename, file_buffer, file_buffer_size))) return 0;
-			}
-		}
 	}
 	else
 	{
@@ -471,31 +570,8 @@ int disk2file(CBM_FILE fd, char *filename)
 		if(!(file_buffer_size = write_nib(file_buffer, track_buffer, track_density, track_length))) return 0;
 		if(!(file_buffer_size = LZ_CompressFast(file_buffer, compressed_buffer, file_buffer_size))) return 0;
 		if(!(save_file(filename, compressed_buffer, file_buffer_size))) return 0;
-
-		if(interactive_mode)
-		{
-			for(;;)
-			{
-				motor_off(fd);
-				printf("Swap disk and press a key for next image, or CTRL-C to quit.\n");
-				getchar();
-				motor_on(fd);
-
-				/* create new filename */
-				sprintf(filenum, "%d", ++count);
-				strcpy(newfilename, filename);
-				dotpos = strrchr(newfilename, '.');
-				if (dotpos != NULL) *dotpos = '\0';
-				strcat(newfilename, filenum);
-				strcat(newfilename, ".nbz");
-
-				if(!(read_floppy(fd, track_buffer, track_density, track_length))) return 0;
-				if(!(file_buffer_size = write_nib(file_buffer, track_buffer, track_density, track_length))) return 0;
-				if(!(file_buffer_size = LZ_CompressFast(file_buffer, compressed_buffer, file_buffer_size))) return 0;
-				if(!(save_file(newfilename, compressed_buffer, file_buffer_size))) return 0;
-			}
-		}
 	}
+	motor_off(fd);
 
 	return 1;
 }
