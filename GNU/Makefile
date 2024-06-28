@@ -22,6 +22,7 @@ CBM_WIN_PATH=	../
 
 # Default compile flags.  Be careful with optimization (-O2)
 CFLAGS=${WARNS}
+CFLAGS+=-D_DEFAULT_SOURCE
 #CFLAGS+=-DSVN=$(shell svn info | grep Revision | sed 's/Revision: //') 
 #CFLAGS+=-DSVN=$(shell svnversion | sed -e 's/.*://' -e 's/[A-Z]*$//')
 
