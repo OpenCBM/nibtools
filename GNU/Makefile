@@ -25,6 +25,9 @@ CFLAGS=${WARNS}
 #CFLAGS+=-DSVN=$(shell svn info | grep Revision | sed 's/Revision: //') 
 #CFLAGS+=-DSVN=$(shell svnversion | sed -e 's/.*://' -e 's/[A-Z]*$//')
 
+# make usleep() known to newer gcc compilers
+CFLAGS+=-D_XOPEN_SOURCE=500
+
 # cl65 defs, contributed by Ullrich von Bassewitz <uz(at)musoftware(dot)de>
 # (cc65 >= 2.6 required)
 CA65        = ca65
