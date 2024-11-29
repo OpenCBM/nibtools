@@ -1,0 +1,7 @@
+*.obj
+*.log
+*.plg
+*.a65
+*.inc
+*.exe
+*.mac
