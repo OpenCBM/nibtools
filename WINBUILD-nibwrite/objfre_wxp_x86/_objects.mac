@@ -1,0 +1,64 @@
+MUI_386_OBJECTS= \
+    $(_OBJ_DIR)\i386\nibwrite.res
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\nibwrite.res \
+    $(_OBJ_DIR)\i386\nibwrite.obj \
+    $(_OBJ_DIR)\i386\gcr.obj \
+    $(_OBJ_DIR)\i386\drive.obj \
+    $(_OBJ_DIR)\i386\prot.obj \
+    $(_OBJ_DIR)\i386\write.obj \
+    $(_OBJ_DIR)\i386\fileio.obj \
+    $(_OBJ_DIR)\i386\crc.obj \
+    $(_OBJ_DIR)\i386\md5.obj \
+    $(_OBJ_DIR)\i386\lz.obj \
+    $(_OBJ_DIR)\i386\ihs.obj
+
+MUI_IA64_OBJECTS= \
+    $(_OBJ_DIR)\ia64\nibwrite.res
+
+IA64_OBJECTS= \
+    $(_OBJ_DIR)\ia64\nibwrite.res \
+    $(_OBJ_DIR)\ia64\nibwrite.obj \
+    $(_OBJ_DIR)\ia64\gcr.obj \
+    $(_OBJ_DIR)\ia64\drive.obj \
+    $(_OBJ_DIR)\ia64\prot.obj \
+    $(_OBJ_DIR)\ia64\write.obj \
+    $(_OBJ_DIR)\ia64\fileio.obj \
+    $(_OBJ_DIR)\ia64\crc.obj \
+    $(_OBJ_DIR)\ia64\md5.obj \
+    $(_OBJ_DIR)\ia64\lz.obj \
+    $(_OBJ_DIR)\ia64\ihs.obj
+
+MUI_AMD64_OBJECTS= \
+    $(_OBJ_DIR)\amd64\nibwrite.res
+
+AMD64_OBJECTS= \
+    $(_OBJ_DIR)\amd64\nibwrite.res \
+    $(_OBJ_DIR)\amd64\nibwrite.obj \
+    $(_OBJ_DIR)\amd64\gcr.obj \
+    $(_OBJ_DIR)\amd64\drive.obj \
+    $(_OBJ_DIR)\amd64\prot.obj \
+    $(_OBJ_DIR)\amd64\write.obj \
+    $(_OBJ_DIR)\amd64\fileio.obj \
+    $(_OBJ_DIR)\amd64\crc.obj \
+    $(_OBJ_DIR)\amd64\md5.obj \
+    $(_OBJ_DIR)\amd64\lz.obj \
+    $(_OBJ_DIR)\amd64\ihs.obj
+
+MUI_ARM_OBJECTS= \
+    $(_OBJ_DIR)\arm\nibwrite.res
+
+ARM_OBJECTS= \
+    $(_OBJ_DIR)\arm\nibwrite.res \
+    $(_OBJ_DIR)\arm\nibwrite.obj \
+    $(_OBJ_DIR)\arm\gcr.obj \
+    $(_OBJ_DIR)\arm\drive.obj \
+    $(_OBJ_DIR)\arm\prot.obj \
+    $(_OBJ_DIR)\arm\write.obj \
+    $(_OBJ_DIR)\arm\fileio.obj \
+    $(_OBJ_DIR)\arm\crc.obj \
+    $(_OBJ_DIR)\arm\md5.obj \
+    $(_OBJ_DIR)\arm\lz.obj \
+    $(_OBJ_DIR)\arm\ihs.obj
+

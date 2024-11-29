@@ -292,6 +292,7 @@ void parseargs(char *argv[])
 				skew = 0;
 			}
 			printf("* Skew set to %dms\n",skew);
+
 		case 't':
 			if(!ihs) align_disk = 1;
 			printf("* Attempt timer-based track alignment\n");
@@ -306,6 +307,11 @@ void parseargs(char *argv[])
 		case 'C':
 			rpm_real = atoi(&(*argv)[2]);
 			printf("* Simulate track capacity: %dRPM\n",rpm_real);
+			if(rpm_real < 282)
+			{
+					printf("ERROR: RPM too slow, cannot store track larger than 8192 bytes!");
+					exit(1);
+			}
 			break;
 
 		case 'F':
@@ -772,18 +778,47 @@ int read_d64(char *filename, BYTE *track_buffer, BYTE *track_density, size_t *tr
 			cur_sector++;
 		}
 
-		// calculate track length
-		track_length[track*2] = sector_map[track] * (SECTOR_SIZE + sector_gap_length[track]);
-
 		// no half tracks in D64, so clear them
 		track_length[(track*2)+1] = 0;
 
 		// use default densities for D64
 		track_density[track*2] = speed_map[track];
 
-		// write track
+		// calculate track length
+		track_length[track*2] = sector_map[track] * (SECTOR_SIZE + sector_gap_length[track]);
+
+		// handle track "stretch"
+		if(rpm_real)
+		{
+			switch (track_density[track*2])
+			{
+				case 0:
+					capacity[speed_map[track]] = (size_t)(DENSITY0/rpm_real);
+					break;
+				case 1:
+					capacity[speed_map[track]] = (size_t)(DENSITY1/rpm_real);
+					break;
+				case 2:
+					capacity[speed_map[track]] = (size_t)(DENSITY2/rpm_real);
+					break;
+				case 3:
+					capacity[speed_map[track]] = (size_t)(DENSITY3/rpm_real);
+					break;
+			}
+			//printf("[%d] = %d\n",track_density[track*2],capacity[speed_map[track*2]]);
+		}
+
+		// use calculated track length
+		track_length[track*2] = capacity[speed_map[track]];
+
+		if(track_length[track*2] < capacity[track_density[track*2]&3])
+		{
+			if(verbose) printf("[pad:%d]", capacity[track_density[track*2]&3] - track_length[track*2]);
+			track_length[track*2] = capacity[track_density[track*2]&3];
+		}
+
+		// render track
 		memcpy(track_buffer + (track * 2 * NIB_TRACK_LENGTH), gcrdata, track_length[track*2]);
-		//printf("%s", errorstring);
 	}
 
 	// "unformat" last 5 tracks on 35 track disk

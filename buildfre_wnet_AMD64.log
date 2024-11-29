@@ -1,0 +1,336 @@
+BUILD: Computing Include file dependencies:
+BUILD: Examining d:\devwork\nibtools\src directory tree for files to compile.
+Building generated files in d:\devwork\nibtools\src\winbuild-nibread ********************
+1>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 PASS0ONLY=1 AMD64=1'
+1>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibread
+Building generated files in d:\devwork\nibtools\src\winbuild-nibwrite ********************
+2>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 PASS0ONLY=1 AMD64=1'
+2>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibwrite
+1>
+2>
+1>Stop.
+2>Stop.
+BUILD: Examining d:\devwork\nibtools\src directory tree for files to compile. (2nd Pass)
+Compiling (NoSync) d:\devwork\nibtools\src\winbuild-nibread directory ********************
+1>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 PASS1_NOLIB=1 AMD64=1'
+1>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibread
+Compiling (NoSync) d:\devwork\nibtools\src\winbuild-nibscan directory ********************
+2>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 PASS1_NOLIB=1 AMD64=1'
+2>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibscan
+Compiling (NoSync) d:\devwork\nibtools\src\winbuild-nibconv directory ********************
+3>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 PASS1_NOLIB=1 AMD64=1'
+3>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibconv
+Compiling (NoSync) d:\devwork\nibtools\src\winbuild-nibrepair directory ********************
+4>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 PASS1_NOLIB=1 AMD64=1'
+4>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibrepair
+Compiling (NoSync) d:\devwork\nibtools\src\winbuild-nibwrite directory ********************
+5>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 PASS1_NOLIB=1 AMD64=1'
+5>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibwrite
+1>cl -nologo  -Iamd64\ -I. -Id:\dev\WINDDK\3790.1830\inc\mfc42 -I../include/WINDOWS -I../../include -I../../include/WINDOWS -I../../arch/windows/ -Iobjfre_wnet_AMD64\amd64 -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\crt -D_WIN64 -D_AMD64_ -DAMD64   -DCONDITION_HANDLING=1   -DNT_INST=0 -DWIN32=100 -D_NT1X_=100 -DWINNT=1 -D_WIN32_WINNT=0x0502 /DWINVER=0x0502 -D_WIN32_IE=0x0603    -DWIN32_LEAN_AND_MEAN=1 -D_AMD64_SIMULATOR_PERF_ -D_SKIP_IF_SIMULATOR_ -D_AMD64_SIMULATOR_ -D_AMD64_WORKAROUND_ -DDEVL=1 -D__BUILDMACHINE__=WinDDK  -DNDEBUG -D_DLL=1 -D_MT=1      /c /Zl /Zp8 /Gy  /W3 /Wp64 /WX     /EHs-c-  /GR- /GF /GS -Z7 /Oxt  -Z7   -FId:\dev\WINDDK\3790.1830\inc\wnet\warning.h   ..\fileio.c 
+2>cl -nologo  -Iamd64\ -I. -Id:\dev\WINDDK\3790.1830\inc\mfc42 -I../include/WINDOWS -I../../include -I../../include/WINDOWS -I../../arch/windows/ -Iobjfre_wnet_AMD64\amd64 -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\crt -D_WIN64 -D_AMD64_ -DAMD64   -DCONDITION_HANDLING=1   -DNT_INST=0 -DWIN32=100 -D_NT1X_=100 -DWINNT=1 -D_WIN32_WINNT=0x0502 /DWINVER=0x0502 -D_WIN32_IE=0x0603    -DWIN32_LEAN_AND_MEAN=1 -D_AMD64_SIMULATOR_PERF_ -D_SKIP_IF_SIMULATOR_ -D_AMD64_SIMULATOR_ -D_AMD64_WORKAROUND_ -DDEVL=1 -D__BUILDMACHINE__=WinDDK  -DNDEBUG -D_DLL=1 -D_MT=1      /c /Zl /Zp8 /Gy  /W3 /Wp64 /WX     /EHs-c-  /GR- /GF /GS -Z7 /Oxt  -Z7   -FId:\dev\WINDDK\3790.1830\inc\wnet\warning.h   ..\fileio.c 
+4>cl -nologo  -Iamd64\ -I. -Id:\dev\WINDDK\3790.1830\inc\mfc42 -I../include/WINDOWS -I../../include -I../../include/WINDOWS -I../../arch/windows/ -Iobjfre_wnet_AMD64\amd64 -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\crt -D_WIN64 -D_AMD64_ -DAMD64   -DCONDITION_HANDLING=1   -DNT_INST=0 -DWIN32=100 -D_NT1X_=100 -DWINNT=1 -D_WIN32_WINNT=0x0502 /DWINVER=0x0502 -D_WIN32_IE=0x0603    -DWIN32_LEAN_AND_MEAN=1 -D_AMD64_SIMULATOR_PERF_ -D_SKIP_IF_SIMULATOR_ -D_AMD64_SIMULATOR_ -D_AMD64_WORKAROUND_ -DDEVL=1 -D__BUILDMACHINE__=WinDDK  -DNDEBUG -D_DLL=1 -D_MT=1      /c /Zl /Zp8 /Gy  /W3 /Wp64 /WX     /EHs-c-  /GR- /GF /GS -Z7 /Oxt  -Z7   -FId:\dev\WINDDK\3790.1830\inc\wnet\warning.h   ..\fileio.c 
+3>cl -nologo  -Iamd64\ -I. -Id:\dev\WINDDK\3790.1830\inc\mfc42 -I../include/WINDOWS -I../../include -I../../include/WINDOWS -I../../arch/windows/ -Iobjfre_wnet_AMD64\amd64 -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\crt -D_WIN64 -D_AMD64_ -DAMD64   -DCONDITION_HANDLING=1   -DNT_INST=0 -DWIN32=100 -D_NT1X_=100 -DWINNT=1 -D_WIN32_WINNT=0x0502 /DWINVER=0x0502 -D_WIN32_IE=0x0603    -DWIN32_LEAN_AND_MEAN=1 -D_AMD64_SIMULATOR_PERF_ -D_SKIP_IF_SIMULATOR_ -D_AMD64_SIMULATOR_ -D_AMD64_WORKAROUND_ -DDEVL=1 -D__BUILDMACHINE__=WinDDK  -DNDEBUG -D_DLL=1 -D_MT=1      /c /Zl /Zp8 /Gy  /W3 /Wp64 /WX     /EHs-c-  /GR- /GF /GS -Z7 /Oxt  -Z7   -FId:\dev\WINDDK\3790.1830\inc\wnet\warning.h   ..\fileio.c 
+5>cl -nologo  -Iamd64\ -I. -Id:\dev\WINDDK\3790.1830\inc\mfc42 -I../include/WINDOWS -I../../include -I../../include/WINDOWS -I../../arch/windows/ -Iobjfre_wnet_AMD64\amd64 -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\wnet -Id:\dev\WINDDK\3790.1830\inc\crt -D_WIN64 -D_AMD64_ -DAMD64   -DCONDITION_HANDLING=1   -DNT_INST=0 -DWIN32=100 -D_NT1X_=100 -DWINNT=1 -D_WIN32_WINNT=0x0502 /DWINVER=0x0502 -D_WIN32_IE=0x0603    -DWIN32_LEAN_AND_MEAN=1 -D_AMD64_SIMULATOR_PERF_ -D_SKIP_IF_SIMULATOR_ -D_AMD64_SIMULATOR_ -D_AMD64_WORKAROUND_ -DDEVL=1 -D__BUILDMACHINE__=WinDDK  -DNDEBUG -D_DLL=1 -D_MT=1      /c /Zl /Zp8 /Gy  /W3 /Wp64 /WX     /EHs-c-  /GR- /GF /GS -Z7 /Oxt  -Z7   -FId:\dev\WINDDK\3790.1830\inc\wnet\warning.h   ..\fileio.c 
+1>fileio.c
+4>fileio.c
+3>fileio.c
+2>fileio.c
+5>fileio.c
+3>
+4>
+3>Stop.
+1>
+2>
+4>Stop.
+2>Stop.
+1>Stop.
+Compiling  d:\devwork\nibtools\src\winbuild-nibread directory ********************
+100>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 AMD64=1'
+100>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibread
+5>
+5>Stop.
+100>
+100>Stop.
+TESTING: Number of dirs done build libs 1 out of  5Compiling  d:\devwork\nibtools\src\winbuild-nibscan directory ********************
+101>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 AMD64=1'
+101>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibscan
+Compiling  d:\devwork\nibtools\src\winbuild-nibconv directory ********************
+102>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 AMD64=1'
+102>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibconv
+Compiling  d:\devwork\nibtools\src\winbuild-nibrepair directory ********************
+103>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 AMD64=1'
+103>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibrepair
+Compiling  d:\devwork\nibtools\src\winbuild-nibwrite directory ********************
+104>'nmake.exe /nologo BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 AMD64=1'
+104>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibwrite
+101>
+102>
+103>
+104>
+101>Stop.
+102>Stop.
+103>Stop.
+104>Stop.
+Linking d:\devwork\nibtools\src\winbuild-nibread directory ********************
+1>'nmake.exe /nologo BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= AMD64=1'
+1>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibread
+Linking d:\devwork\nibtools\src\winbuild-nibscan directory ********************
+2>'nmake.exe /nologo BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= AMD64=1'
+2>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibscan
+Linking d:\devwork\nibtools\src\winbuild-nibconv directory ********************
+3>'nmake.exe /nologo BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= AMD64=1'
+3>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibconv
+Linking d:\devwork\nibtools\src\winbuild-nibrepair directory ********************
+4>'nmake.exe /nologo BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= AMD64=1'
+4>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibrepair
+Linking d:\devwork\nibtools\src\winbuild-nibwrite directory ********************
+5>'nmake.exe /nologo BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= AMD64=1'
+5>BUILDMSG: Processing d:\devwork\nibtools\src\winbuild-nibwrite
+2>	link -out:../../bin\amd64\nibscan.exe -machine:amd64 @C:\Users\peter\AppData\Local\Temp\nmE3DB.tmp
+3>	link -out:../../bin\amd64\nibconv.exe -machine:amd64 @C:\Users\peter\AppData\Local\Temp\nmE3EB.tmp
+4>	link -out:../../bin\amd64\nibrepair.exe -machine:amd64 @C:\Users\peter\AppData\Local\Temp\nmE3EC.tmp
+1>	link -out:../../bin\amd64\nibread.exe -machine:amd64 @C:\Users\peter\AppData\Local\Temp\nmE3ED.tmp
+5>	link -out:../../bin\amd64\nibwrite.exe -machine:amd64 @C:\Users\peter\AppData\Local\Temp\nmE3EE.tmp
+3>Microsoft (R) Incremental Linker Version 8.00.40310.39
+3>Copyright (C) Microsoft Corporation.  All rights reserved.
+3>
+3>-MERGE:_PAGE=PAGE 
+3>-MERGE:_TEXT=.text 
+3>-SECTION:INIT,d 
+3>-OPT:REF 
+3>-OPT:ICF 
+3>-IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218 
+3>-INCREMENTAL:NO 
+3>-FULLBUILD 
+3>/release 
+3>-NODEFAULTLIB 
+3>/WX 
+3>-debug 
+3>-debugtype:cv 
+3>-version:5.2 
+3>-osversion:5.2 
+3>-debug 
+3>-debugtype:cv,fixup,pdata 
+3>/opt:nowin98 
+3>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\hotpatch.obj 
+3>/functionpadmin:6 
+3>-merge:.rdata=.text 
+3>/pdbcompress 
+3>-STACK:0x80000,0x2000 
+3>/tsaware 
+3>-subsystem:console,4.00 
+3>-base:@d:\dev\WINDDK\3790.1830\bin\coffbase.txt,usermode64 
+3>-entry:mainCRTStartup 
+3>objfre_wnet_AMD64\amd64\nibconv.res 
+3>objfre_wnet_AMD64\amd64\nibconv.obj 
+3>objfre_wnet_AMD64\amd64\gcr.obj 
+3>objfre_wnet_AMD64\amd64\prot.obj 
+3>objfre_wnet_AMD64\amd64\fileio.obj 
+3>objfre_wnet_AMD64\amd64\crc.obj 
+3>objfre_wnet_AMD64\amd64\md5.obj 
+3>objfre_wnet_AMD64\amd64\lz.obj 
+3>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\BufferOverflowU.lib 
+3>d:\dev\WINDDK\3790.1830\lib\crt\amd64\msvcrt.lib 
+3>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\advapi32.lib 
+3>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\kernel32.lib 
+3>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\ntdll.lib 
+2>Microsoft (R) Incremental Linker Version 8.00.40310.39
+2>Copyright (C) Microsoft Corporation.  All rights reserved.
+2>
+2>-MERGE:_PAGE=PAGE 
+2>-MERGE:_TEXT=.text 
+2>-SECTION:INIT,d 
+2>-OPT:REF 
+2>-OPT:ICF 
+2>-IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218 
+2>-INCREMENTAL:NO 
+2>-FULLBUILD 
+2>/release 
+2>-NODEFAULTLIB 
+2>/WX 
+2>-debug 
+2>-debugtype:cv 
+2>-version:5.2 
+2>-osversion:5.2 
+2>-debug 
+2>-debugtype:cv,fixup,pdata 
+2>/opt:nowin98 
+2>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\hotpatch.obj 
+2>/functionpadmin:6 
+2>-merge:.rdata=.text 
+2>/pdbcompress 
+2>-STACK:0x80000,0x2000 
+2>/tsaware 
+2>-subsystem:console,4.00 
+2>-base:@d:\dev\WINDDK\3790.1830\bin\coffbase.txt,usermode64 
+2>-entry:mainCRTStartup 
+2>objfre_wnet_AMD64\amd64\nibscan.res 
+2>objfre_wnet_AMD64\amd64\nibscan.obj 
+2>objfre_wnet_AMD64\amd64\gcr.obj 
+2>objfre_wnet_AMD64\amd64\prot.obj 
+2>objfre_wnet_AMD64\amd64\fileio.obj 
+2>objfre_wnet_AMD64\amd64\crc.obj 
+2>objfre_wnet_AMD64\amd64\md5.obj 
+2>objfre_wnet_AMD64\amd64\lz.obj 
+2>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\BufferOverflowU.lib 
+2>d:\dev\WINDDK\3790.1830\lib\crt\amd64\msvcrt.lib 
+2>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\advapi32.lib 
+2>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\kernel32.lib 
+2>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\ntdll.lib 
+4>Microsoft (R) Incremental Linker Version 8.00.40310.39
+4>Copyright (C) Microsoft Corporation.  All rights reserved.
+4>
+4>-MERGE:_PAGE=PAGE 
+4>-MERGE:_TEXT=.text 
+4>-SECTION:INIT,d 
+4>-OPT:REF 
+4>-OPT:ICF 
+4>-IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218 
+4>-INCREMENTAL:NO 
+4>-FULLBUILD 
+4>/release 
+4>-NODEFAULTLIB 
+4>/WX 
+4>-debug 
+4>-debugtype:cv 
+4>-version:5.2 
+4>-osversion:5.2 
+4>-debug 
+4>-debugtype:cv,fixup,pdata 
+4>/opt:nowin98 
+4>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\hotpatch.obj 
+4>/functionpadmin:6 
+4>-merge:.rdata=.text 
+4>/pdbcompress 
+4>-STACK:0x80000,0x2000 
+4>/tsaware 
+4>-subsystem:console,4.00 
+4>-base:@d:\dev\WINDDK\3790.1830\bin\coffbase.txt,usermode64 
+4>-entry:mainCRTStartup 
+4>objfre_wnet_AMD64\amd64\nibrepair.res 
+4>objfre_wnet_AMD64\amd64\nibrepair.obj 
+4>objfre_wnet_AMD64\amd64\gcr.obj 
+4>objfre_wnet_AMD64\amd64\prot.obj 
+4>objfre_wnet_AMD64\amd64\fileio.obj 
+4>objfre_wnet_AMD64\amd64\crc.obj 
+4>objfre_wnet_AMD64\amd64\md5.obj 
+4>objfre_wnet_AMD64\amd64\lz.obj 
+4>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\BufferOverflowU.lib 
+4>d:\dev\WINDDK\3790.1830\lib\crt\amd64\msvcrt.lib 
+4>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\advapi32.lib 
+4>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\kernel32.lib 
+4>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\ntdll.lib 
+1>Microsoft (R) Incremental Linker Version 8.00.40310.39
+1>Copyright (C) Microsoft Corporation.  All rights reserved.
+1>
+1>-MERGE:_PAGE=PAGE 
+1>-MERGE:_TEXT=.text 
+1>-SECTION:INIT,d 
+1>-OPT:REF 
+1>-OPT:ICF 
+1>-IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218 
+1>-INCREMENTAL:NO 
+1>-FULLBUILD 
+1>/release 
+1>-NODEFAULTLIB 
+1>/WX 
+1>-debug 
+1>-debugtype:cv 
+1>-version:5.2 
+1>-osversion:5.2 
+1>-debug 
+1>-debugtype:cv,fixup,pdata 
+1>/opt:nowin98 
+1>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\hotpatch.obj 
+1>/functionpadmin:6 
+1>-merge:.rdata=.text 
+1>/pdbcompress 
+1>-STACK:0x80000,0x2000 
+1>/tsaware 
+1>-subsystem:console,4.00 
+1>-base:@d:\dev\WINDDK\3790.1830\bin\coffbase.txt,usermode64 
+1>-entry:mainCRTStartup 
+1>objfre_wnet_AMD64\amd64\nibread.res 
+1>objfre_wnet_AMD64\amd64\nibread.obj 
+1>objfre_wnet_AMD64\amd64\gcr.obj 
+1>objfre_wnet_AMD64\amd64\drive.obj 
+1>objfre_wnet_AMD64\amd64\prot.obj 
+1>objfre_wnet_AMD64\amd64\read.obj 
+1>objfre_wnet_AMD64\amd64\fileio.obj 
+1>objfre_wnet_AMD64\amd64\crc.obj 
+1>objfre_wnet_AMD64\amd64\md5.obj 
+1>objfre_wnet_AMD64\amd64\lz.obj 
+1>objfre_wnet_AMD64\amd64\ihs.obj 
+1>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\BufferOverflowU.lib 
+1>d:\dev\WINDDK\3790.1830\lib\crt\amd64\msvcrt.lib 
+1>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\advapi32.lib 
+1>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\kernel32.lib 
+1>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\ntdll.lib 
+1>../../bin/amd64/opencbm.lib 
+5>Microsoft (R) Incremental Linker Version 8.00.40310.39
+5>Copyright (C) Microsoft Corporation.  All rights reserved.
+5>
+5>-MERGE:_PAGE=PAGE 
+5>-MERGE:_TEXT=.text 
+5>-SECTION:INIT,d 
+5>-OPT:REF 
+5>-OPT:ICF 
+5>-IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218 
+5>-INCREMENTAL:NO 
+5>-FULLBUILD 
+5>/release 
+5>-NODEFAULTLIB 
+5>/WX 
+5>-debug 
+5>-debugtype:cv 
+5>-version:5.2 
+5>-osversion:5.2 
+5>-debug 
+5>-debugtype:cv,fixup,pdata 
+5>/opt:nowin98 
+5>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\hotpatch.obj 
+5>/functionpadmin:6 
+5>-merge:.rdata=.text 
+5>/pdbcompress 
+5>-STACK:0x80000,0x2000 
+5>/tsaware 
+5>-subsystem:console,4.00 
+5>-base:@d:\dev\WINDDK\3790.1830\bin\coffbase.txt,usermode64 
+5>-entry:mainCRTStartup 
+5>objfre_wnet_AMD64\amd64\nibwrite.res 
+5>objfre_wnet_AMD64\amd64\nibwrite.obj 
+5>objfre_wnet_AMD64\amd64\gcr.obj 
+5>objfre_wnet_AMD64\amd64\drive.obj 
+5>objfre_wnet_AMD64\amd64\prot.obj 
+5>objfre_wnet_AMD64\amd64\write.obj 
+5>objfre_wnet_AMD64\amd64\fileio.obj 
+5>objfre_wnet_AMD64\amd64\crc.obj 
+5>objfre_wnet_AMD64\amd64\md5.obj 
+5>objfre_wnet_AMD64\amd64\lz.obj 
+5>objfre_wnet_AMD64\amd64\ihs.obj 
+5>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\BufferOverflowU.lib 
+5>d:\dev\WINDDK\3790.1830\lib\crt\amd64\msvcrt.lib 
+5>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\advapi32.lib 
+5>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\kernel32.lib 
+5>d:\dev\WINDDK\3790.1830\lib\wnet\amd64\ntdll.lib 
+5>../../bin/amd64/opencbm.lib 
+3>	echo Skip Binplace:
+2>	echo Skip Binplace:
+4>	echo Skip Binplace:
+1>	echo Skip Binplace:
+3>Skip Binplace:
+2>Skip Binplace:
+5>	echo Skip Binplace:
+4>Skip Binplace:
+1>Skip Binplace:
+3>
+2>
+5>Skip Binplace:
+4>
+3>Stop.
+2>Stop.
+5>
+4>Stop.
+1>
+5>Stop.
+1>Stop.
