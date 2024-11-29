@@ -1,6 +1,6 @@
 README.TXT for the NIBTOOLS utilities (Updated 2/16/2014)
 
-homepage: https://c64preservation.com/dp.php?pg=nibtools
+homepage: https://diskpreservation.com/dp.php?pg=nibtools
 
 NIBTOOLS is copyrighted
 (C) 2005 Pete Rittwage 
@@ -28,15 +28,13 @@ In addition, NIBTOOLS at least contains code and/or bug fixes contributed by:
    - Commodore Disk Drive model 1541, 1541-II or 1571, modified to support
      the parallel XP1541 or XP1571 interface [1]
 
-   - XP1541 or XP1571 cable
-	* AND *
-   - XE1541, XA1541, or XM1541 cable [1]
+   - XUM1541 (ZoomFloppy) with a 1541+Parallel cable, OR a 1571 with no parallel cable needed.
 	* OR * 
    - XEP1541, XAP1541, or XMP1541 combination cable [1]
 	* OR * 
-   - XUM1541 (ZoomFloppy) with a 1541+Parallel cable, OR a 1571 with no parallel cable needed.
+   - XP1541 or XP1571 cable and XE1541, XA1541, or XM1541 cable [1]
 		
-   - Windows XP/Vista/Windows 7/Windows 10; x64 or x86 Editions, with OpenCBM 0.4.2 or higher
+   - Windows, x64 or x86 Editions, with OpenCBM 0.4.2 or higher (latest versions always recommended)
      Linux with OpenCBM 0.4.0 or higher,
      MS/DR/Caldera DOS and cwsdpmi.exe software (no longer tested but still compiles with DJGPP for old <=P3 hardware)
      
@@ -46,8 +44,7 @@ In addition, NIBTOOLS at least contains code and/or bug fixes contributed by:
 
 Reading real disks into disk images:
 
-   1) connect 1541/71 drive to your PC's parallel port(s), using
-      the XE1541/XA1541 and the XP1541/71 cables, XEP/XAP/XMP combo cable, or ZoomFloppy.
+   1) connect 1541/71 drive to your PC's parallel port(s), using the above cabling.
 
    2) insert disk into drive and start NIBTOOLS:
        nibread [options] filename.nib
@@ -64,8 +61,7 @@ Reading real disks into disk images:
 
 Writing back disk images to a real disk:
 
-   1) connect 1541/71 drive to your PC's parallel port(s), using
-      the XE1541/XA1541 and the XP1541/71 cables, or XEP/XAP/XMP combo cable, or ZoomFloppy.
+   1) connect 1541/71 drive to your PC's parallel port(s), using the above cabling.
 
    2) insert destination disk into drive and start NIBTOOLS:
        nibwrite filename.nib
@@ -73,11 +69,9 @@ Writing back disk images to a real disk:
        nibwrite filename.g64
        nibwrite filename.d64
 
-
 ========================================
 = Tips and Tricks                      =
 ========================================
-
 
    Please support us!
    ------------------
@@ -122,15 +116,16 @@ Writing back disk images to a real disk:
    Sync counting/anomalies          X     Epyx (early Vorpal)
    Nonstandard bitrates             X     V-MAX!, Rapidlok
    Bitrate changes in track	    X	  Software Toolworks (Chessmaster 2100, etc.)
-   NO sync marks	            X	  later EA (Pirateslayer)      
-   ALL sync marks (killer)	    X	  Br0derbund, various
-   track/sector synchronization     X     Rapidlok, various 
-   00 Bytes                         X     Rapidlok, Datasoft, Rainbow Arts
+   NO sync marks	            X	  later EA (Pirateslayer), later Vorpal
+   SHORT sync marks (10 bits)	    X     V-MAX!
+   ALL sync marks (killer)	    X	  Br0derbund
+   track/sector synchronization     X     Rapidlok
+   Weak bits                        X     Rapidlok, Datasoft, Rainbow Arts, Mindscape
 
    Not all of these may run on the current emulators. Disk emulation
    still isn't perfect, especially some of the more tricky protections
    (sector synchronization, Bitrate changes, bad GCR) are not yet
-   fully implemented by all current emulators.
+   fully implemented by all emulators.
 
    ---
 
@@ -159,7 +154,7 @@ Writing back disk images to a real disk:
    -l    : Limit functions to 40 tracks (R/W) Some disk drives will not function past track 41 and will click
 	   and jam the heads too far forward. The drive cover must then be removed and the head pushed back
 	   manually. If this happens to you, use this option with every operation. There are only a few disks
-	   which utilize track 41 for protection.
+	   which utilize track >=41 for protection.
 
    -h 	 : Toggle halftracks (R/W) This option will step the drive heads 1/2 track at a time during disk
 	   operations instead of a full track. This protection is only very rarely used.  I have only found
@@ -174,7 +169,7 @@ Writing back disk images to a real disk:
 	   motor speed). Some protections count sync lengths so the protection might fail with this
 	   option. For 99% of disks, it is fine and is the default setting.
 	 
-	   * You can now specify a minimum sync length to leave behind in bytes using [n]
+	   * You can specify a minimum sync length to leave behind in bytes using [n]
 
    -F[n] : Creates a "FAT" track in the output image when used with nibconv, on track [n]+0.5,[n]+1.
 	   When used without [n] it will attempt to detect a FAT track by comparing GCR data.
@@ -217,7 +212,7 @@ Writing back disk images to a real disk:
 	   -aw: Align all tracks to the longest run of unformatted data. 
 	   -ag: Align all tracks to the longest gap between sectors. 
 	   -a0: Align all tracks to sector 0. 
-	   -as: Align all tracks to the longest sync mark. 
+	   -as: Align all tracks to the longest sync mark (needed for UXB/Melbourne House protection)
 	   -aa: Align all tracks to the longest run of any one byte (autogap).
 	   -an: Align all tracks to the raw data as found (not normally used).
 
@@ -258,9 +253,9 @@ Writing back disk images to a real disk:
 	   of a disk, because it will never see the index hole.
 	   This also does not work in SRQ mode.
 
-   -b[x] : Force custom "fill" byte to use for overlap and filling empty space.  Default is 0x55, which is normally "inert"
-	   and doesn't interfere with the data stream.  Will accept '0' for "bad" GCR, "5" for 0x55 (inert data), "F" for sync, 
-	   or "?" to repeat the last byte found before the track loops.
+   -b[x] : Force custom "fill" byte to use for overlap and filling empty space.  
+	   Default is automatically using the last byte of the detected track cycle
+	   Other useful ones are "00" for "bad" GCR, "55" for 0x55 (inert data), or "FF" for sync.
    
    -C[n] : Simulate a certain track capacity (given [n] as motor RPM, default 300) used when converting to G64.  
 	   You can use this to see what happens when creating a G64 with regards to compression/truncation that happens
@@ -307,7 +302,7 @@ Writing back disk images to a real disk:
    - Mat Allen (Mayhem)
    - Chris Link            
    - Jerry Kurtz      
-   - H†kan Sundell         
+   - HÂ†kan Sundell         
    - Nicolas Welte         
    - Tim Schurman
    - Joerg Droege
