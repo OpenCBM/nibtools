@@ -5,3 +5,5 @@
 *.inc
 *.exe
 *.mac
+*.o
+*.bin
