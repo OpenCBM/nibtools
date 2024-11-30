@@ -785,7 +785,7 @@ int read_d64(char *filename, BYTE *track_buffer, BYTE *track_density, size_t *tr
 		track_density[track*2] = speed_map[track];
 
 		// calculate track length
-		track_length[track*2] = sector_map[track] * (SECTOR_SIZE + sector_gap_length[track]);
+		//track_length[track*2] = sector_map[track] * (SECTOR_SIZE + sector_gap_length[track]);
 
 		// handle track "stretch"
 		if(rpm_real)
@@ -808,7 +808,7 @@ int read_d64(char *filename, BYTE *track_buffer, BYTE *track_density, size_t *tr
 			//printf("[%d] = %d\n",track_density[track*2],capacity[speed_map[track*2]]);
 		}
 
-		// use calculated track length
+		// use real/calculated track length
 		track_length[track*2] = capacity[speed_map[track]];
 
 		if(track_length[track*2] < capacity[track_density[track*2]&3])

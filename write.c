@@ -23,9 +23,9 @@ master_track(CBM_FILE fd, BYTE *track_buffer, BYTE *track_density, int track, si
 	if(track_inc==1) leader=0;
 	else leader=10;
 
-	if(track_density[track] & BM_NO_SYNC)
-		memset(rawtrack, 0x55, sizeof(rawtrack));
-	else
+	//if(track_density[track] & BM_NO_SYNC)
+	//	memset(rawtrack, 0x55, sizeof(rawtrack));
+	//else
 		memset(rawtrack, fillbyte, sizeof(rawtrack));
 
 	/* merge track data */
@@ -69,10 +69,10 @@ master_track(CBM_FILE fd, BYTE *track_buffer, BYTE *track_density, int track, si
 	}
 
 	// try to do track alignment through simple timers
+	// really only works on old parallel setup
 	if((skew||align_disk) && (auto_capacity_adjust))
 	{
-		/* subtract overhead from one revolution;
-	    adjust for motor speed and density; */
+		/* subtract overhead from one revolution; adjust for motor speed and density; */
 		align_delay = (int)((motor_speed*200000)/300)-18000; // roughly the step time is 18
 		align_delay += skew*1000;
 		if(align_delay>200000) align_delay-=200000;
@@ -94,6 +94,7 @@ master_track(CBM_FILE fd, BYTE *track_buffer, BYTE *track_density, int track, si
 		//burst_write(fd, (unsigned char)((align_disk) ? 0xfb : 0x00));
 		burst_write(fd, (unsigned char)(0x00));
 
+		/* I think the +1 is because the last byte is not written 100%, but probably never matters */
 		if (burst_write_track(fd, rawtrack, (int)(tracklen + leader + 1)))
 			break;
 		else
