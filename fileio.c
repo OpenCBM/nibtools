@@ -809,13 +809,7 @@ int read_d64(char *filename, BYTE *track_buffer, BYTE *track_density, size_t *tr
 		}
 
 		// use real/calculated track length
-		track_length[track*2] = capacity[speed_map[track]];
-
-		if(track_length[track*2] < capacity[track_density[track*2]&3])
-		{
-			if(verbose) printf("[pad:%d]", capacity[track_density[track*2]&3] - track_length[track*2]);
-			track_length[track*2] = capacity[track_density[track*2]&3];
-		}
+		track_length[track*2] = capacity[speed_map[track]&3];
 
 		// render track
 		memcpy(track_buffer + (track * 2 * NIB_TRACK_LENGTH), gcrdata, track_length[track*2]);
